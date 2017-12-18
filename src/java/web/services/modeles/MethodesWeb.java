@@ -3,10 +3,12 @@ package web.services.modeles;
 
 import dto.DtoContrat;
 import dto.DtoInterventionDunContrat;
+import dto.DtoTechnicien;
 import entites.Client;
 import entites.Contrat;
 import entites.Intervention;
 import entites.Technicien;
+import entites.Grade;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
@@ -14,7 +16,8 @@ import utilitaires.UtilDate;
 
 public class MethodesWeb {
  
-    @Inject dao.consultation.contrat.DaoContrat daoCont; 
+    @Inject dao.consultation.contrat.DaoContrat daoCont;
+    @Inject dao.consultation.technicien.DaoTechnicien daoTech;
     @Inject dao.maj.DaoMaj                      daomaj;
     
     public DtoContrat getLeDtoContrat(Long numcont) {
@@ -33,6 +36,21 @@ public class MethodesWeb {
         dtoContrat.setEcart(cont.ecart()); 
         
         return dtoContrat;  
+    }
+    public DtoTechnicien getLeDtoTechnicien(Long numero) {
+       
+        DtoTechnicien dtoTechnicien= new DtoTechnicien();
+        
+        Technicien tech =daoTech.getLeTechnicien(numero);
+        
+        dtoTechnicien.setNumero(numero);
+        dtoTechnicien.setNom(tech.getNom());
+        dtoTechnicien.setDateEmbauche(UtilDate.format(tech.getDateEmbauche()));
+        dtoTechnicien.setCoutHoraireTechnicien(tech.coutHoraireTechnicien());
+        dtoTechnicien.setLibelleGrade(tech.getLeGrade().getLibelle());
+        dtoTechnicien.setTauxHoraire(tech.getLeGrade().getTauxHoraire());
+
+        return dtoTechnicien;  
     }
     
     public List<DtoInterventionDunContrat> getLesDtoInterventionContrat(Long numcont) {

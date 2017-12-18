@@ -16,6 +16,7 @@ public class ApplicationConfig extends Application {
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
          resources.add(WebServRestContrat.class);
+         resources.add(WebServRestTechnicien.class);
          resources.add(WebServRestStats.class);
     }    
 }
