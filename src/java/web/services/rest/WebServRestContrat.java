@@ -36,8 +36,9 @@ public class WebServRestContrat {
     public List<DtoInterventionDunContrat> getInterventionsContrat(@PathParam("numcont") Long numcont) {
          
         return mw.getLesDtoInterventionContrat(numcont);
+        
     }  
-    
+   
      
     @GET
     @Path("arbrecontrat/{numcont}")

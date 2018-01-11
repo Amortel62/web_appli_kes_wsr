@@ -2,6 +2,7 @@ package web.services.rest;
 
 import dto.DtoTechnicien;
 import dto.DtoInterventionDunContrat;
+import dto.DtoInterventionDunTechnicien;
 import entites.Client;
 import entites.Contrat;
 import entites.Intervention;
@@ -30,7 +31,14 @@ public class WebServRestTechnicien {
        
         return mw.getLeDtoTechnicien(numero);
     
-    
-    
     }
+    
+       @GET
+    @Path("interventions/{numero}")
+    @Produces({"application/xml","application/json"})
+    public List<DtoInterventionDunTechnicien> getInterventionsTechnicien(@PathParam("numero") Long numero) {
+         
+        return mw.getLesDtoInterventionTechnicien(numero);
+        
+    } 
 }

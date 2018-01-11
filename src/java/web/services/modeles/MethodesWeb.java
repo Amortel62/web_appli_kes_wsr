@@ -3,6 +3,7 @@ package web.services.modeles;
 
 import dto.DtoContrat;
 import dto.DtoInterventionDunContrat;
+import dto.DtoInterventionDunTechnicien;
 import dto.DtoTechnicien;
 import entites.Client;
 import entites.Contrat;
@@ -69,6 +70,28 @@ public class MethodesWeb {
             dto.setNomTech(interv.getLeTechnicien().getNom());
             dto.setCoutMO(interv.fraisMO());
             dto.setCoutKM(interv.fraisKM());
+            resultat.add(dto);
+        }
+        return resultat;
+    }
+    
+    public List<DtoInterventionDunTechnicien> getLesDtoInterventionTechnicien(Long numero) {
+        
+        List<DtoInterventionDunTechnicien> resultat= new LinkedList();
+        
+        for(Intervention interv : daoTech.getLeTechnicien(numero).getLesInterventions()){
+        
+            DtoInterventionDunTechnicien dto=new DtoInterventionDunTechnicien();
+            
+            dto.setNumero(numero);
+            dto.setNumInterv(interv.getNumero());
+            dto.setCoutMO(interv.fraisMO());
+            dto.setCoutKM(interv.fraisKM());
+            dto.setCoutInterv(interv.coutInterv());
+            dto.setDateInterv(UtilDate.format(interv.getDateInterv()));
+            dto.setDuree(interv.getDuree());
+            dto.setNumcont(interv.getLeContrat().getNumero());
+            
             resultat.add(dto);
         }
         return resultat;
