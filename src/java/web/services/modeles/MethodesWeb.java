@@ -116,4 +116,21 @@ public class MethodesWeb {
         
       return contrat;
     }
+    
+    public Technicien getArbreTechnicien(Long numero){
+       
+       Technicien technicien= daoTech.getLeTechnicien(numero); 
+        
+      
+  
+       for (Intervention interv : technicien.getLesInterventions()){
+       
+             daomaj.detacherEntite(interv);
+             interv.setLeTechnicien(null);
+            
+       }
+        
+      return technicien;
+    }
+    
 }
